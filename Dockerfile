@@ -3,6 +3,8 @@ FROM alpine:3.8
 RUN apk update
 RUN apk add nginx
 
+COPY nginx-create-proxy.sh .
+
 ENV NGINX_PORT=80
 
 ENV PROXY_HOST_1="#"
