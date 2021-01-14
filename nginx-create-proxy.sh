@@ -1,8 +1,9 @@
-#/bin/ash
+#/bin/sh
 
-touch /etc/nginx/sites-available/proxy.conf
+mkdir /etc/nginx/sites-enabled
+touch /etc/nginx/sites-enabled/proxy.conf
 
-cat > /etc/nginx/sites-available/proxy.conf << EOL
+cat > /etc/nginx/sites-enabled/proxy.conf << EOL
 
 upstream backend {
     least_conn;
@@ -23,4 +24,3 @@ server{
 }
 
 EOL
-
