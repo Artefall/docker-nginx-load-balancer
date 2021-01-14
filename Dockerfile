@@ -7,7 +7,7 @@ RUN mkdir /run/nginx
 RUN mkdir /run/openrc
 RUN touch /run/openrc/softlevel
 
-ARG NGINX_PORT
+ENV NGINX_PORT=80
 ENV PROXY_HOST_1=
 ENV PROXY_HOST_2=
 ENV PROXY_HOST_3=
