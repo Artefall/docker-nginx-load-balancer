@@ -1,4 +1,4 @@
-#/bin/bash
+#/bin/ash
 
 touch /etc/nginx/sites-available/proxy.conf
 
