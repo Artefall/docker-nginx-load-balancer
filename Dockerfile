@@ -8,16 +8,28 @@ RUN mkdir /run/openrc
 RUN touch /run/openrc/softlevel
 
 ENV NGINX_PORT=80
-ENV PROXY_HOST_1=
-ENV PROXY_HOST_2=
-ENV PROXY_HOST_3=
-ENV PROXY_HOST_4=
-ENV PROXY_HOST_5=
 
-COPY ./nginx-create-proxy.sh ./script.sh
-RUN chmod +x ./script.sh
+ENV PROXY_HOST_1=
+ENV PROXY_PATH_1=
+
+ENV PROXY_HOST_2=
+ENV PROXY_PATH_2=
+
+ENV PROXY_HOST_3=
+ENV PROXY_PATH_3=
+
+ENV PROXY_HOST_4=
+ENV PROXY_PATH_4=
+
+ENV PROXY_HOST_5=
+ENV PROXY_PATH_5=
+
+
+
+COPY ./docker-create-proxy-script.sh /usr/local/bin/docker-create-proxy-script.sh
+RUN chmod +x /usr/local/bin/docker-create-proxy-script.sh
 
 EXPOSE ${NGINX_PORT}
 
-STOPSIGNAL SIGQUIT
+ENTRYPOINT [ "docker-create-proxy-script.sh" ]
 CMD ["nginx", "-g", "daemon off;"]
