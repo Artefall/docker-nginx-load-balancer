@@ -1,11 +1,12 @@
 FROM alpine:3.8
 
 RUN apk update
-RUN apk add nginx
 RUN apk add openrc
+RUN apk add nginx
 RUN mkdir /run/nginx
 RUN mkdir /run/openrc
 RUN touch /run/openrc/softlevel
+
 
 ENV NGINX_PORT=80
 
@@ -28,6 +29,7 @@ ENV PROXY_PATH_5=
 
 COPY ./docker-create-proxy-script.sh /usr/local/bin/docker-create-proxy-script.sh
 RUN chmod +x /usr/local/bin/docker-create-proxy-script.sh
+
 
 EXPOSE ${NGINX_PORT}
 
