@@ -2,10 +2,6 @@ pipeline{
 
     agent any
 
-    environment{
-
-    }
-
     stages{
         stage("Build docker container"){
             steps{
