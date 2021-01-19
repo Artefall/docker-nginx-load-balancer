@@ -13,7 +13,7 @@ pipeline{
             steps{
                 
                 script{
-                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommitttttttttttttttttttttttttttttttttttt nginx-proxy", returnStdout: true)
+                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommit nginx-proxy", returnStdout: true)
                 } 
             }
         }
@@ -31,7 +31,7 @@ pipeline{
         stage("Commit to dockerhub"){
             steps{
                 script{
-                    sh(script:"docker container commit $env.containerId nginx-proxy:$VERSION", returnStdout: true)
+                    sh(script: "docker container commit $env.containerId nginx-proxy:$VERSION", returnStdout: true)
                 }
             }
         }
@@ -45,7 +45,7 @@ pipeline{
     }
     post{
         always{
-            sh "docker kill containerToCommitttttttttttttttttttttttttttttttttttt"
+            sh "docker kill containerToCommit"
             }
         }
   
