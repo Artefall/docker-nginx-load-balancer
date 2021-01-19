@@ -22,7 +22,7 @@ pipeline{
 
         stage("Commit docker container to dockerhub"){
             steps{
-                cat $PASSWORD > sh "docker login -u $USERNAME --password-stdin"
+                sh "cat $PASSWORD | docker login -u $USERNAME --password-stdin"
                 sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
             }
         }
