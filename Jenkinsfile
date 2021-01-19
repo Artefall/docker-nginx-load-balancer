@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     environment{
-        containerToCommitId=""
+        containerToCommitId
     }
 
     stages{
@@ -16,7 +16,7 @@ pipeline{
         stage("Run container"){
             steps{
                 script{
-                    env.containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
+                    containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline{
         stage("Commit to dockerhub"){
             steps{
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "docker commit $env.containerToCommitId artefall/nginx-proxy:latest"
+                    sh "docker commit $containerToCommitId artefall/nginx-proxy:latest"
                 }
             }
         }
