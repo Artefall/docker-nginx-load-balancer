@@ -2,10 +2,6 @@ pipeline{
 
     agent any
 
-    
-    def containerToCommitId = ""
-    
-
     stages{
         stage("Build docker container"){
             steps{
@@ -16,7 +12,7 @@ pipeline{
         stage("Run container"){
             steps{
                 script{
-                    containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
+                    sh "containerToCommitId = docker run --rm -d -t --name containerToCommit nginx-proxy"
                 }
             }
         }
