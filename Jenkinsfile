@@ -1,20 +1,15 @@
 pipeline{
 
-    def app
-
     agent any
 
     environment{
-        containerToCommitId="",
-        registryCredentials='dockerhub_id'
+        containerToCommitId=""
     }
 
     stages{
         stage("Build docker container"){
             steps{
-                script{
-                    app = docker.build("artefall/nginx-proxy")
-                }
+                sh "docker build -f Dockerfile -t nginx-proxy ."
             }
         }
 
