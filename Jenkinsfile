@@ -5,7 +5,7 @@ pipeline{
     agent any
 
     environment{
-        containerToCommitId="",
+        containerToCommitId='',
         registryCredentials='dockerhub_id'
     }
 
