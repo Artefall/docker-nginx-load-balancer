@@ -1,38 +1,51 @@
 pipeline{
+
+    def app
+
     agent any
 
     environment{
-        containerToCommitId=""
+        containerToCommitId="",
+        registryCredentials='dockerhub_id'
     }
 
     stages{
         stage("Build docker container"){
             steps{
-                sh "docker build -f Dockerfile -t nginx-proxy ."
-            }
-        }
-
-        stage("Run container"){
-            steps{
                 script{
-                    env.containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
+                    app = docker.build("artefall/nginx-proxy")
                 }
             }
         }
 
+        // stage("Run container"){
+        //     steps{
+        //         script{
+        //             env.containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
+        //         }
+        //     }
+        // }
+
         stage("Commit and push docker container to dockerhub"){
             steps{
-                sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
-                sh "docker push artefall/nginx-proxy:tagname"
+
+                script{
+
+                    docker.withRegistry('', registryCredentials)
+
+                    
+
+                    customImage.push("latest")
+                }
             }
         }
 
         
     }
-    post{
-        always{
-            sh "docker kill containerToCommit"
-            }
-        }
+    // post{
+    //     always{
+    //         sh "docker kill containerToCommit"
+    //         }
+    //     }
   
 }
