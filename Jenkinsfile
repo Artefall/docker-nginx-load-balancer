@@ -12,7 +12,7 @@ pipeline{
         stage("Run container"){
             steps{
                 script{
-                    sh "containerToCommitId = docker run --rm -d -t --name containerToCommit nginx-proxy"
+                    sh "containerToCommitId=$(docker run --rm -d -t --name containerToCommit nginx-proxy)"
                 }
             }
         }
