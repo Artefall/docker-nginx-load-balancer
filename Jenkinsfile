@@ -26,9 +26,9 @@ pipeline{
 
                 sh "echo $TOKEN > password.txt"
 
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
-                }
+                //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
+                //}
                 
             }
         }
