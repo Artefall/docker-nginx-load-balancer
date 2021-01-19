@@ -11,7 +11,6 @@ pipeline{
 
         stage("Run container"){
             steps{
-                
                 script{
                     env.containerId=sh(script: "docker run --rm -d -t --name containerToCommit nginx-proxy | tr -d '\n'", returnStdout: true)
                 } 
@@ -22,7 +21,6 @@ pipeline{
             steps{
 
                 sh "echo $TOKEN > password.txt"
-
                 sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
                 
             }
