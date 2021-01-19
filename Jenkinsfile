@@ -22,7 +22,8 @@ pipeline{
 
         stage("Commit docker container to dockerhub"){
             steps{
-                sh "cat $TOKEN | docker login -u $USERNAME --password-stdin"
+                sh "echo $TOKEN > password.txt"
+                sh "cat password.txt | docker login -u $USERNAME --password-stdin"
                 sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
             }
         }
@@ -36,6 +37,7 @@ pipeline{
     post{
         always{
             sh "docker kill containerToCommit"
+            sh "rm password.txt"
             }
         }
   
