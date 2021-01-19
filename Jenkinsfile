@@ -31,7 +31,7 @@ pipeline{
         stage("Commit to dockerhub"){
             steps{
                 script{
-                    sh(script:"docker commit ${env.containerId} artefall/nginx-proxy:latest")
+                    sh(script:"docker commit ${env.containerId} artefall/nginx-proxy")
                 }
             }
         }
