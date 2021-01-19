@@ -21,13 +21,21 @@ pipeline{
             }
         }
 
-        stage("Commit and push docker container to dockerhub"){
+        stage("Login into dockerhub"){
             steps{
-                sh "echo $TOKEN > password.txt"
-                sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
 
-                sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
+                sh "echo $TOKEN > password.txt"
+
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
+                }
                 
+            }
+        }
+
+        stage("Commit to dockerhub"){
+            steps{
+                sh "docker commit $containerToCommitId artefall/nginx-proxy:latest"
             }
         }
 
