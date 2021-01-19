@@ -17,7 +17,6 @@ pipeline{
                 script{
                     env.containerToCommitId = sh "docker run --rm -d -t --name containerToCommit nginx-proxy"
                 }
-                
             }
         }
 
@@ -30,9 +29,14 @@ pipeline{
 
         stage("Kill container"){
             steps{
-                sh "docker kill $containerToCommit"
+                sh "docker kill containerToCommit"
             }
         }
     }
+    post{
+        always{
+            sh "docker kill containerToCommit"
+            }
+        }
   
 }
