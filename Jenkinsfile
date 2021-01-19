@@ -14,14 +14,17 @@ pipeline{
 
         stage("Run container"){
             steps{
-                containerToCommitId = sh "docker run -d -t --name containerToCommit nginx-proxy"
+                script{
+                    env.containerToCommitId = sh "docker run -d -t --name containerToCommit nginx-proxy"
+                }
+                
             }
         }
 
         stage("Commit docker container to dockerhub"){
             steps{
                 sh "docker login -u $USERNAME -p $PASSWORD"
-                sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
+                sh "docker commit $env.containerToCommitId artefall/nginx-proxy:$VERSION"
             }
 
         }
