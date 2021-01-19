@@ -35,7 +35,9 @@ pipeline{
 
         stage("Commit to dockerhub"){
             steps{
-                sh "docker commit $containerToCommitId artefall/nginx-proxy:latest"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "docker commit $containerToCommitId artefall/nginx-proxy:latest"
+                }
             }
         }
 
