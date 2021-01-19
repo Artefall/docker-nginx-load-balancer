@@ -22,8 +22,8 @@ pipeline{
 
         stage("Commit docker container to dockerhub"){
             steps{
-                //sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
-                sh "docker commit burgerking artefall/nginx-proxy:$VERSION"
+                cat $PASSWORD > sh "docker login -u $USERNAME --password-stdin"
+                sh "docker commit $containerToCommitId artefall/nginx-proxy:$VERSION"
             }
         }
 
