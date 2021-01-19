@@ -11,9 +11,7 @@ pipeline{
 
         stage("Run container"){
             steps{
-                script{
-                    sh "containerToCommitId=`docker run --rm -d -t --name containerToCommit nginx-proxy`"
-                }
+                sh "containerToCommitId=`docker run --rm -d -t --name containerToCommit nginx-proxy`"
             }
         }
 
@@ -22,9 +20,7 @@ pipeline{
 
                 sh "echo $TOKEN > password.txt"
 
-                //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 sh "cat password.txt | docker login -u artefall --password-stdin 2>/dev/null"
-                //}
                 
             }
         }
