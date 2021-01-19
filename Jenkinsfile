@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     
-    def containerToCommitId
+    def containerToCommitId = ""
     
 
     stages{
