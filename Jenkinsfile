@@ -13,7 +13,7 @@ pipeline{
             steps{
                 
                 script{
-                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommit nginx-proxy", returnStdout: true)
+                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommitttttttttttttttttttttttttttttttttttt nginx-proxy", returnStdout: true)
                 } 
             }
         }
@@ -45,7 +45,7 @@ pipeline{
     }
     post{
         always{
-            sh "docker kill containerToCommit"
+            sh "docker kill containerToCommitttttttttttttttttttttttttttttttttttt"
             }
         }
   
