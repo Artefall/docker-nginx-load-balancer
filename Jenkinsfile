@@ -2,9 +2,9 @@ pipeline{
 
     agent any
 
-    environment{
-        containerToCommitId=""
-    }
+    
+    def containerToCommitId
+    
 
     stages{
         stage("Build docker container"){
