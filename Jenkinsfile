@@ -13,7 +13,7 @@ pipeline{
             steps{
                 
                 script{
-                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommit nginx-proxy", returnStdout: true)
+                    env.containerId=sh(script: "docker run --rm -d -t --name containerToCommit nginx-proxy | tr -d '\n'", returnStdout: true)
                 } 
             }
         }
